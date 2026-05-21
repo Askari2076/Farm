@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farm House Expense Tracker - Eid Day 02</title>
+  <!-- Modern Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Web Application Layout -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation (Desktop) / Bottom/Top Nav (Mobile) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </div>
+        <div class="logo-text">
+          <h2>Farm House</h2>
+          <span>Eid Day 02 Budget</span>
+        </div>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-tab="home" id="tab-btn-home">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-tab="expenses" id="tab-btn-expenses">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Expenses</span>
+        </button>
+        <button class="nav-btn" data-tab="inflows" id="tab-btn-inflows">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          <span>Inflows</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="quick-action-row">
+          <button class="btn btn-icon-only tooltip" id="export-json-btn" title="Export Backup (JSON)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          </button>
+          <button class="btn btn-icon-only tooltip" id="import-trigger-btn" title="Import Backup (JSON)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          </button>
+          <input type="file" id="import-json-file" accept=".json" style="display: none;">
+          <button class="btn btn-icon-only tooltip danger" id="reset-app-btn" title="Reset All Data">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+          </button>
+        </div>
+        <div class="user-badge">
+          <div class="avatar">E2</div>
+          <div class="user-info">
+            <span class="user-name">Eid Day 02 Event</span>
+            <span class="user-role">Host Dashboard</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Bar / App Header -->
+      <header class="main-header">
+        <div class="header-title">
+          <span class="date-badge">Eid Day 02 Event</span>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary tooltip" id="export-csv-btn" title="Export Ledger to CSV">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>Export CSV</span>
+          </button>
+          <button class="btn btn-primary" id="global-add-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Add Transaction</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- TAB 1: DASHBOARD (HOME) -->
+      <section class="tab-view active" id="tab-home">
+        <!-- Stats Summary Row -->
+        <div class="stats-grid">
+          
+          <div class="stat-card inflow-card">
+            <div class="card-glow"></div>
+            <div class="stat-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">Total Inflows</span>
+              <h2 class="stat-amount" id="dash-total-inflows">PKR 0</h2>
+              <span class="stat-desc">From Cash, Contributions & Deposits</span>
+            </div>
+          </div>
+
+          <div class="stat-card expense-card">
+            <div class="card-glow"></div>
+            <div class="stat-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">Total Expenses</span>
+              <h2 class="stat-amount" id="dash-total-expenses">PKR 40,000</h2>
+              <span class="stat-desc">Preloaded Farm House & other categories</span>
+            </div>
+          </div>
+
+          <div class="stat-card balance-card" id="balance-card-container">
+            <div class="card-glow"></div>
+            <div class="stat-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="2" y1="14" x2="6" y2="14"></line><line x1="10" y1="8" x2="14" y2="8"></line><line x1="18" y1="16" x2="22" y2="16"></line></svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">Net Balance</span>
+              <h2 class="stat-amount" id="dash-net-balance">PKR -40,000</h2>
+              <span class="stat-desc" id="dash-balance-sub">Deficit: Need inflows to cover costs</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dashboard Visual Analysis Section -->
+        <div class="dashboard-details">
+          
+          <!-- Category Budget Bars (CSS Progress Gauges) -->
+          <div class="glass-panel breakdown-panel">
+            <div class="panel-header">
+              <h3>Expense Category Allocations</h3>
+              <span class="pill outline" id="total-categories-count">4 Categories</span>
+            </div>
+            
+            <div class="category-bars-list" id="dashboard-category-bars">
+              <!-- Dynamically populated categories with elegant meters -->
+              <div class="category-progress-item">
+                <div class="progress-details">
+                  <div class="cat-label">
+                    <span class="dot farmhouse-dot"></span>
+                    <strong>Farm House</strong>
+                  </div>
+                  <span class="progress-val">PKR 40,000 (100%)</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-bar" style="width: 100%; background: var(--gradient-expense);"></div>
+                </div>
+              </div>
+
+              <div class="category-progress-item">
+                <div class="progress-details">
+                  <div class="cat-label">
+                    <span class="dot foods-dot"></span>
+                    <strong>Foods</strong>
+                  </div>
+                  <span class="progress-val">PKR 0 (0%)</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="category-progress-item">
+                <div class="progress-details">
+                  <div class="cat-label">
+                    <span class="dot transport-dot"></span>
+                    <strong>Transport</strong>
+                  </div>
+                  <span class="progress-val">PKR 0 (0%)</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="category-progress-item">
+                <div class="progress-details">
+                  <div class="cat-label">
+                    <span class="dot misc-dot"></span>
+                    <strong>Miscellaneous</strong>
+                  </div>
+                  <span class="progress-val">PKR 0 (0%)</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity & Ledger Quick Summary -->
+          <div class="glass-panel recent-activity-panel">
+            <div class="panel-header">
+              <h3>Recent Transactions</h3>
+              <button class="btn-text" id="view-all-activity-btn">View All</button>
+            </div>
+            <div class="activity-timeline" id="recent-transactions-timeline">
+              <!-- Dynamically populated timelines with SVG icons -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 2: EXPENSES PAGE -->
+      <section class="tab-view" id="tab-expenses">
+        
+        <!-- Expense Header / Interactive Category Row -->
+        <div class="category-cards-grid" id="expenses-category-cards">
+          <!-- Populated by JavaScript, showing interactive individual cards for each expense category -->
+        </div>
+
+        <!-- Ledger controls -->
+        <div class="glass-panel ledger-panel">
+          <div class="ledger-header">
+            <h3>Expenses Ledger</h3>
+            <div class="ledger-actions">
+              <div class="search-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="expense-search" placeholder="Search expenses...">
+              </div>
+              <select class="ledger-select" id="expense-category-filter">
+                <option value="all">All Categories</option>
+                <option value="Farm House">Farm House</option>
+                <option value="Transport">Transport</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Foods">Foods</option>
+              </select>
+              <button class="btn btn-primary" id="add-expense-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Add Expense</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="ledger-table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th class="actions-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="expenses-table-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+            <!-- Empty state illustration if no expenses -->
+            <div class="empty-state-container" id="expenses-empty-state" style="display: none;">
+              <div class="empty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+              <h4>No expenses matched your filter</h4>
+              <p>Add a new expense or clear your search to see results.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 3: INFLOWS PAGE -->
+      <section class="tab-view" id="tab-inflows">
+        
+        <!-- Inflows Stats Banner -->
+        <div class="inflows-banner">
+          <div class="banner-data">
+            <h2>Track Farm House Contributions</h2>
+            <p>Ensure all cash received, member deposits, and event contributions are logged to calculate the exact balance.</p>
+          </div>
+          <div class="banner-gauge">
+            <span class="banner-val-lbl">Total Logged Inflow</span>
+            <span class="banner-val-amount" id="inflow-banner-total">PKR 0</span>
+          </div>
+        </div>
+
+        <!-- Inflows Ledger -->
+        <div class="glass-panel ledger-panel">
+          <div class="ledger-header">
+            <h3>Inflows Ledger</h3>
+            <div class="ledger-actions">
+              <div class="search-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="inflow-search" placeholder="Search inflows...">
+              </div>
+              <select class="ledger-select" id="inflow-category-filter">
+                <option value="all">All Inflow Types</option>
+                <option value="Contributions">Contributions</option>
+                <option value="Cash received">Cash Received</option>
+                <option value="Deposits">Deposits</option>
+                <option value="Custom Inflow">Other Custom Inflows</option>
+              </select>
+              <button class="btn btn-success" id="add-inflow-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Add Inflow</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="ledger-table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Source/Type</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th class="actions-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inflows-table-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+            <!-- Empty state illustration if no inflows -->
+            <div class="empty-state-container" id="inflows-empty-state" style="display: none;">
+              <div class="empty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+              </div>
+              <h4>No inflows recorded yet</h4>
+              <p>Add cash contributions or deposits to cover outstanding expenses.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- PREMIUM TRANSLUCENT MODAL PANELS (SLIDE OUTS) -->
+  <div class="modal-backdrop" id="transaction-modal-backdrop">
+    <div class="modal-card" id="transaction-modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Add Transaction</h3>
+        <button class="btn-close" id="modal-close-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      
+      <form class="modal-body" id="transaction-form" novalidate>
+        <!-- Hidden Inputs for State Management -->
+        <input type="hidden" id="form-transaction-id" value="">
+        
+        <!-- Transaction Type Switcher -->
+        <div class="form-group">
+          <label class="form-label">Transaction Type</label>
+          <div class="type-toggle-container">
+            <button type="button" class="toggle-btn toggle-expense active" id="form-type-expense">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+              Expense
+            </button>
+            <button type="button" class="toggle-btn toggle-inflow" id="form-type-inflow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+              Inflow
+            </button>
+          </div>
+        </div>
+
+        <!-- Description Input -->
+        <div class="form-group">
+          <label for="form-desc" class="form-label">Description</label>
+          <div class="input-wrapper">
+            <input type="text" id="form-desc" class="form-input" placeholder="e.g., Farm House Rent Deposit, Food Catering..." required>
+          </div>
+          <span class="form-error-msg" id="desc-error">Description is required</span>
+        </div>
+
+        <!-- Amount Input -->
+        <div class="form-group">
+          <label for="form-amount" class="form-label">Amount (PKR)</label>
+          <div class="input-wrapper amount-wrapper">
+            <span class="currency-prefix">PKR</span>
+            <input type="number" id="form-amount" class="form-input" placeholder="0" min="1" step="any" required>
+          </div>
+          <span class="form-error-msg" id="amount-error">Amount must be greater than 0</span>
+        </div>
+
+        <!-- Dynamic Category Dropdown (Populated based on Transaction Type selection) -->
+        <div class="form-group">
+          <label for="form-category" class="form-label">Category / Source</label>
+          <select id="form-category" class="form-input" required>
+            <!-- Rendered by JS -->
+          </select>
+          <span class="form-error-msg" id="category-error">Please select a valid category</span>
+        </div>
+
+        <!-- Custom Category Input (shown when "Other Custom" is selected) -->
+        <div class="form-group" id="custom-category-group" style="display: none;">
+          <label for="form-custom-category" class="form-label">Custom Category Name</label>
+          <input type="text" id="form-custom-category" class="form-input" placeholder="e.g., Pool Cleaning, Sound System...">
+          <span class="form-error-msg" id="custom-cat-error">Custom category name is required</span>
+        </div>
+
+        <!-- Date Input -->
+        <div class="form-group">
+          <label for="form-date" class="form-label">Transaction Date</label>
+          <input type="date" id="form-date" class="form-input" required>
+          <span class="form-error-msg" id="date-error">Valid date is required</span>
+        </div>
+
+        <!-- Form Action Row -->
+        <div class="form-footer">
+          <button type="button" class="btn btn-secondary" id="form-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="form-submit-btn">Save Entry</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- GLOBAL NOTIFICATION TOAST WRAPPER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- APPLICATION CODE -->
+  <script src="app.js"></script>
+</body>
+</html>
